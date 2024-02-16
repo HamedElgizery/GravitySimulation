@@ -5,6 +5,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <algorithm>
 
 class Body {
   private:
@@ -17,6 +18,8 @@ class Body {
     Body();
     void draw(sf::RenderWindow*);
     void update();
+    void adjust();
+    void bounce();
 };
 
 #endif

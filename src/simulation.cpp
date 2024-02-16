@@ -1,7 +1,7 @@
 #include "simulation.h"
 
 Simulation::Simulation() {
-  this->window = new sf::RenderWindow(sf::VideoMode(3000, 1500), "Gravity Simulation"); 
+  this->window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Gravity Simulation"); 
   this->window->setFramerateLimit(30);
   body = Body();
 }
