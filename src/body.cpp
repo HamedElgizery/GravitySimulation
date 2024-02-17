@@ -48,3 +48,51 @@ void Body::adjust() {
   position.x = fmin(Simulation::WINDOW_WIDTH - circle.getRadius(), position.x);
   position.y = fmin(Simulation::WINDOW_HEIGHT - circle.getRadius(), position.y);
 }
+
+bool Body::collides(const Body& other) {
+  sf::Vector2f other_position = other.getPosition();
+  if (distance(other_position) <= other.getRadius() + this->radius)
+    return true;
+  return false;
+}
+
+float Body::distance(sf::Vector2f point) {
+  sf::Vector2f diff = this->position - point;
+  return sqrt(diff.x * diff.x + diff.y * diff.y);
+}
+
+// Getters
+
+sf::Vector2f Body::getPosition() const {
+  return position;
+}
+
+sf::Vector2f Body::getVelocity() const {
+  return velocity;
+}
+
+sf::Vector2f Body::getAcceleration() const {
+  return acceleration;
+}
+
+float Body::getRadius() const {
+  return radius;
+}
+
+// Setters
+
+void Body::setPosition(sf::Vector2f position) {
+  this->position = position;
+}
+
+void Body::setVelocity(sf::Vector2f velocity) {
+  this->velocity = velocity;
+}
+
+void Body::setAcceleration(sf::Vector2f acceleration) {
+  this->acceleration = acceleration;
+}
+
+void Body::setRadius(float radius) {
+  this->radius = radius;
+}

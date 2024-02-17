@@ -8,7 +8,7 @@ class Simulation {
 private:
   sf::Event event;
   sf::RenderWindow* window;
-  Body body;
+  std::vector<Body> bodies;
 public:
   static const int WINDOW_WIDTH = 2000;
   static const int WINDOW_HEIGHT = 1500;
