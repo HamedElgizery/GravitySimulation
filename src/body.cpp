@@ -4,17 +4,18 @@
 
 
 Body::Body() {
-  mass = radius = Randomizer::Random(20.0f, 20.0f);
+  mass = radius = Randomizer::Random(20.0f, 40.0f);
   position = sf::Vector2f(Randomizer::Random(radius, Simulation::WINDOW_WIDTH - radius),
       Randomizer::Random(radius, Simulation::WINDOW_HEIGHT - radius));
-  velocity = sf::Vector2f(Randomizer::Random(-10.1f, 10.2f),
-      Randomizer::Random(-10.1f, 10.2f));
+  velocity = sf::Vector2f(Randomizer::Random(-5.1f, 5.2f),
+      Randomizer::Random(-5.1f, 5.2f));
   acceleration = sf::Vector2f(Randomizer::Random(0.1f, 0.2f),
       Randomizer::Random(0.1f, 0.2f));
   circle = sf::CircleShape(radius);
   circle.setRadius(radius);
   circle.setOrigin(radius, radius);
   circle.setPosition(position);
+  circle.setFillColor(sf::Color(rand() % 256, rand() % 256, rand() % 256));
 }
 
 void Body::draw(sf::RenderWindow* window) {
@@ -23,7 +24,7 @@ void Body::draw(sf::RenderWindow* window) {
 
 void Body::update() {
   bounce();
-  //velocity += acceleration;
+  velocity += acceleration;
   position += velocity;
   adjust();
   circle.setPosition(position);

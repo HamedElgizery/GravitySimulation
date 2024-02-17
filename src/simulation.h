@@ -10,6 +10,7 @@ private:
   sf::RenderWindow* window;
   std::vector<Body> bodies;
 public:
+  static constexpr float G = 6674e-14;
   static const int WINDOW_WIDTH = 2000;
   static const int WINDOW_HEIGHT = 1500;
   Simulation();
