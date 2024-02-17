@@ -14,8 +14,8 @@ class Body {
     sf::Vector2f acceleration;
     sf::CircleShape circle;
     float radius;
-    float mass; // equal radius for now
   public:
+    float mass; // equal radius for now
     Body();
     void draw(sf::RenderWindow*);
     void update();
@@ -31,6 +31,7 @@ class Body {
     void setRadius(float);
     float distance(sf::Vector2f);
     bool collides(const Body&);
+    void processCollision(Body&);
 };
 
 #endif

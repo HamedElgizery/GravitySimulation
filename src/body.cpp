@@ -4,7 +4,7 @@
 
 
 Body::Body() {
-  radius = Randomizer::Random(60.0f, 60.0f);
+  mass = radius = Randomizer::Random(20.0f, 20.0f);
   position = sf::Vector2f(Randomizer::Random(radius, Simulation::WINDOW_WIDTH - radius),
       Randomizer::Random(radius, Simulation::WINDOW_HEIGHT - radius));
   velocity = sf::Vector2f(Randomizer::Random(-10.1f, 10.2f),
@@ -61,6 +61,20 @@ float Body::distance(sf::Vector2f point) {
   return sqrt(diff.x * diff.x + diff.y * diff.y);
 }
 
+void Body::processCollision(Body& other) {
+
+  float newVelX1 = (this->velocity.x * (this->mass - other.mass) + (2 * other.mass * other.velocity.x)) / (this->mass + other.mass);
+  float newVelY1 = (this->velocity.y * (this->mass - other.mass) + (2 * other.mass * other.velocity.y)) / (this->mass + other.mass);
+  float newVelX2 = (other.getVelocity().x * (other.mass - this->mass) + (2 * this->mass * this->velocity.x)) / (this->mass + other.mass);
+  float newVelY2 = (other.getVelocity().y * (other.mass - this->mass) + (2 * this->mass * this->velocity.y)) / (this->mass + other.mass);
+  this->velocity = sf::Vector2f(newVelX1, newVelY1);
+  other.setVelocity(sf::Vector2f(newVelX2, newVelY2));
+  while(this->collides(other)) {
+    this->update();
+    other.update();
+  }
+}
+
 // Getters
 
 sf::Vector2f Body::getPosition() const {
@@ -96,3 +110,5 @@ void Body::setAcceleration(sf::Vector2f acceleration) {
 void Body::setRadius(float radius) {
   this->radius = radius;
 }
+
+
